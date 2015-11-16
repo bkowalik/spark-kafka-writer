@@ -65,7 +65,7 @@ class TestUtil {
     val zkProperties: Properties = new Properties
     dataDir = Files.createTempDir()
     try {
-      zkProperties.load(classOf[Class[_]].getResourceAsStream("/zookeeper.properties"))
+      zkProperties.load(getClass.getResourceAsStream("/zookeeper.properties"))
       zkProperties.setProperty("dataDir", dataDir.toString)
       var zookeeper: ZooKeeperLocal = null
       var portAssigned = false
@@ -82,7 +82,7 @@ class TestUtil {
         }
       }
       logger.info("ZooKeeper instance is successfully started on port " + zkLocalPort)
-      kafkaProperties.load(classOf[Class[_]].getResourceAsStream("/kafka-server.properties"))
+      kafkaProperties.load(getClass.getResourceAsStream("/kafka-server.properties"))
       kafkaProperties.setProperty("zookeeper.connect", getZkUrl)
       var started = false
       while (!started) {
